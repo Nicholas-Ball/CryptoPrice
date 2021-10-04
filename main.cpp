@@ -5,9 +5,9 @@
 
 int main()
 {
-    Coin c("btc");
+  Coin c("btc");
 
-    c.SetCoin("btc");
+  std::cout<<c.GetTodaysHigh()<<"\n";
 
-    return 0;
+  return 0;
 }
