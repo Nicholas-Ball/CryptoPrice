@@ -7,7 +7,9 @@ int main()
 {
   Coin c("btc");
 
-  std::cout<<c.GetTodaysHigh()<<"\n";
+  c.Graph();
+
+  std::cout<<"\n";
 
   return 0;
 }

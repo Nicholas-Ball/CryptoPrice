@@ -53,13 +53,13 @@ class Coin
         double HighToday;
         double LowToday;
 
+        //graphs
         std::vector<double> PriceGraph;
         std::vector<double> VolumeGraph;
         std::vector<double> MarketCapGraph;
       
         net n;
     public:
-
         //refresh CoinList
         void RefreshList()
         {   
@@ -128,9 +128,23 @@ class Coin
         double GetTodaysLow()
         {
           return this->LowToday;
+        }
+
+        void Graph()
+        {
+          //get coin history
+          this->n.Get("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365");
+          auto j = nlohmann::json::parse(n.Response());
+
+          //add to gragh array in reverse order (current day at index 0)
+          for(int i = (j["prices"].size()-1); i != -1;i--)
+          {
+            this->PriceGraph.push_back(j["prices"][i][1]);
+            this->VolumeGraph.push_back(j["total_volumes"][i][1]);
+            this->MarketCapGraph.push_back(j["market_caps"][i][1]);
+            std::cout<<j["prices"][i][1]<<std::endl;
+          }
         }  
-
-
 
         //constructor
         Coin(std::string CoinSymbol)
