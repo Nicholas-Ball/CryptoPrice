@@ -132,8 +132,17 @@ class Coin
 
         void Graph()
         {
+
+          auto list = CoinList();
+          int index = SymbolToIndex(list,this->Symbol);
+          if (index == -1)
+          {
+              throw std::runtime_error("Invaild Symbol");
+          }
+
+
           //get coin history
-          this->n.Get("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365");
+          this->n.Get("https://api.coingecko.com/api/v3/coins/"+list[index]["id"].get<std::string>()+"/market_chart?vs_currency=usd&days=365");
           auto j = nlohmann::json::parse(n.Response());
 
           //add to gragh array in reverse order (current day at index 0)
@@ -142,9 +151,33 @@ class Coin
             this->PriceGraph.push_back(j["prices"][i][1]);
             this->VolumeGraph.push_back(j["total_volumes"][i][1]);
             this->MarketCapGraph.push_back(j["market_caps"][i][1]);
-            std::cout<<j["prices"][i][1]<<std::endl;
           }
+
         }  
+
+        nlohmann::json GetPriceGraph(){
+          if(this->PriceGraph.size()  == 0)
+          {
+            Graph();
+          }
+          return this->PriceGraph;
+        }
+
+        nlohmann::json GetVolumeGraph(){
+          if(this->PriceGraph.size()  == 0)
+          {
+            Graph();
+          }
+          return this->PriceGraph;
+        }
+
+        nlohmann::json GetPriceGraph(){
+          if(this->PriceGraph.size()  == 0)
+          {
+            Graph();
+          }
+          return this->PriceGraph;
+        }
 
         //constructor
         Coin(std::string CoinSymbol)
