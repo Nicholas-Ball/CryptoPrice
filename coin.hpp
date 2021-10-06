@@ -168,15 +168,15 @@ class Coin
           {
             Graph();
           }
-          return this->PriceGraph;
+          return this->VolumeGraph;
         }
 
-        nlohmann::json GetPriceGraph(){
+        nlohmann::json GetMarketCapGraph(){
           if(this->PriceGraph.size()  == 0)
           {
             Graph();
           }
-          return this->PriceGraph;
+          return this->MarketCapGraph;
         }
 
         //constructor

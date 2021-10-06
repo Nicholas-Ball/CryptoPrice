@@ -6,10 +6,15 @@
 int main()
 {
   Coin c("btc");
+  auto graph = c.GetMarketCapGraph();
 
-  c.Graph();
+  
 
-  std::cout<<"\n";
+  /*
+  for(int i = 0; i != graph.size();i++)
+  {
+    std::cout<<graph[i]<<" ";
+  }*/
 
   return 0;
 }
