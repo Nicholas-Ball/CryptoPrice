@@ -179,6 +179,16 @@ class Coin
           return this->MarketCapGraph;
         }
 
+        void Refresh()
+        {
+          SetCoin(this->Symbol);
+        }
+
+        void RefreshGraphs()
+        {
+          Graph();
+        }
+
         //constructor
         Coin(std::string CoinSymbol)
         {
