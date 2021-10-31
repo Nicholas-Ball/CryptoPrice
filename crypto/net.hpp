@@ -3,6 +3,7 @@
 #include <fstream>
 #include <thread>
 #include <chrono>
+#include <sys/stat.h>
 
 
 //checks if file exits
@@ -36,7 +37,8 @@ class net{
           srand(r2);
 
           //get url
-          const std::string command = "curl -m 2 -X GET -s -o "+f1+" -w \"%{http_code}\n\" \""+url+"\" > "+f2;
+          const std::string command = ("curl -m 2 -X GET -s -o "+f1+" -w \"%{http_code}\" \""+url+"\" > "+f2);
+          std::cout<<command<<std::endl;
           system(command.c_str());
 
           //ensure data is writen to files before continuing
@@ -83,7 +85,7 @@ class net{
           srand(r2);
 
           //Post url
-          const std::string command = "curl -X POST -d "+data+" -s -o "+f1+" -w \"%{http_code}\n\" \""+url+"\" > "+f2;
+          const std::string command = ("curl -X POST -d "+data+" -s -o "+f1+" -w \"%{http_code}\" \""+url+"\" > "+f2);
           system(command.c_str());
 
           //ensure data is writen to files before continuing
